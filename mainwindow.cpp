@@ -13,3 +13,17 @@ MainWindow::~MainWindow()
 {
     delete ui;
 }
+
+void MainWindow::on_pushButtonAlarm_clicked(bool checked)
+{
+    if (checked){
+        this->ui->pushButtonPower->setChecked(false);
+    }
+}
+
+void MainWindow::on_pushButtonPower_clicked(bool checked)
+{
+    if (checked){
+        this->ui->pushButtonAlarm->setChecked(false);
+    }
+}

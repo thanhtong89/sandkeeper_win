@@ -18,6 +18,10 @@ public:
 private slots:
 
 
+    void on_pushButtonAlarm_clicked(bool checked);
+
+    void on_pushButtonPower_clicked(bool checked);
+
 private:
     Ui::MainWindow *ui;
     int days;
