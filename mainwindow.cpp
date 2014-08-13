@@ -73,11 +73,10 @@ int MainWindow::get_time_left(){
 }
 
 void MainWindow::set_countdown_state(bool state){
-    bool allow_input = !state;
-    this->ui->timeEditDay->setEnabled(allow_input);
-    this->ui->timeEditHour->setEnabled(allow_input);
-    this->ui->timeEditMinute->setEnabled(allow_input);
-    this->ui->timeEditSecond->setEnabled(allow_input);
+    this->ui->timeEditDay->setReadOnly(state);
+    this->ui->timeEditHour->setReadOnly(state);
+    this->ui->timeEditMinute->setReadOnly(state);
+    this->ui->timeEditSecond->setReadOnly(state);
 
     // starting an already started timer will briefly stop it,
     // resulting in a perceptible pause of the countdown

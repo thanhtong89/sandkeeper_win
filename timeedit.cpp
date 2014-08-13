@@ -11,7 +11,7 @@ TimeEdit::TimeEdit(QWidget *parent) : QLineEdit(parent) {
 }
 
 void TimeEdit::wheelEvent(QWheelEvent *event){
-    if (!this->isEnabled()){
+    if (this->isReadOnly() || !this->isEnabled()){
         return;
     }
 
