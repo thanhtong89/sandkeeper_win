@@ -9,7 +9,7 @@ class TimeEdit : public QLineEdit
 
 public:
     explicit TimeEdit(QWidget *parent = 0);
-    //explicit TimeEdit(const QString &contents, QWidget *parent = 0);
+
 private slots:
     void keep_format();
 };

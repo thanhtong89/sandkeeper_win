@@ -4,7 +4,6 @@
 #include <QStyleFactory>
 
 TimeEdit::TimeEdit(QWidget *parent) : QLineEdit(parent) {
-    //TimeEdit::TimeEdit("", parent);
     connect(this, SIGNAL(editingFinished()), this, SLOT(keep_format()));
     QStyle* fusion = QStyleFactory::create(QString("Fusion"));
     this->setStyle(fusion);
