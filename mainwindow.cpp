@@ -12,6 +12,7 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->timeEditDay->set_digits(3);
     ui->timeEditDay->set_upper_bound(1000);
     ui->timeEditHour->set_upper_bound(24);
+
     timer = new QTimer(this);
     connect(timer, SIGNAL(timeout()), this, SLOT(tick()));
 }
@@ -23,24 +24,15 @@ MainWindow::~MainWindow(){
 void MainWindow::on_pushButtonAlarm_clicked(bool checked){
     if (checked){
         this->ui->pushButtonPower->setChecked(false);
-        if (get_time_left()){
-            set_countdown_state(true);
-        }
-        else{
-            set_countdown_state(false);
-        }
+        set_countdown_state(true);
     }
 }
 
 void MainWindow::on_pushButtonPower_clicked(bool checked){
     if (checked){
         this->ui->pushButtonAlarm->setChecked(false);
-        if (get_time_left()){
-            set_countdown_state(true);
-        }
-        else{
-            set_countdown_state(false);
-        }
+        set_countdown_state(true);
+
     }
 }
 
@@ -87,6 +79,49 @@ void MainWindow::set_countdown_state(bool state){
     }
 }
 
+
+bool MainWindow::update_counters(){
+    int days = this->ui->timeEditDay->text().toInt();
+    int hours = this->ui->timeEditHour->text().toInt();
+    int minutes = this->ui->timeEditMinute->text().toInt();
+    int seconds = this->ui->timeEditSecond->text().toInt();
+    qDebug() << days << " " << hours << " " << minutes << " " << seconds;
+    if (days + hours + minutes + seconds == 0){
+        return true;
+    }
+    if (--seconds < 0){
+        seconds += 60;
+        minutes--;
+    }
+    if (minutes < 0){
+        minutes += 60;
+        hours--;
+    }
+    if (hours < 0){
+        hours += 24;
+        days--;
+    }
+    if (days < 0){
+        days = 0;
+    }
+
+    this->ui->timeEditDay->format_text(days);
+    this->ui->timeEditHour->format_text(hours);
+    this->ui->timeEditMinute->format_text(minutes);
+    this->ui->timeEditSecond->format_text(seconds);
+    return (days + hours + minutes + seconds == 0);
+}
+
 void MainWindow::tick(){
-    qDebug() << QTime::currentTime();
+    if (update_counters()){
+        qDebug() << "Time's up!";
+        if (this->ui->pushButtonAlarm->isChecked()){
+            qDebug() << "Alarm!";
+            this->ui->pushButtonAlarm->setChecked(false);
+        }
+        else if (this->ui->pushButtonPower->isChecked()){
+            qDebug() << "Power!";
+            this->ui->pushButtonPower->setChecked(false);
+        }
+    }
 }

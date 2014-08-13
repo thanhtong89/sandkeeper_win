@@ -12,6 +12,7 @@ public:
     explicit TimeEdit(QWidget *parent = 0);
     void set_digits(int value);
     void set_upper_bound(int value);
+    void format_text(int value);
     void wheelEvent (QWheelEvent *event);
 
 private slots:

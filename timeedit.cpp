@@ -11,6 +11,10 @@ TimeEdit::TimeEdit(QWidget *parent) : QLineEdit(parent) {
 }
 
 void TimeEdit::wheelEvent(QWheelEvent *event){
+    if (!this->isEnabled()){
+        return;
+    }
+
     event->accept();
     int value = this->text().toInt();
     int delta = 1;
@@ -18,9 +22,7 @@ void TimeEdit::wheelEvent(QWheelEvent *event){
         delta = -delta;
     }
     value = (value + delta + max_val) % max_val;
-
-    QString formatted = QString("%1").arg(value, digits, 10, QChar('0'));
-    this->setText(formatted);
+    format_text(value);
 }
 
 void TimeEdit::set_digits(int value){
@@ -31,8 +33,12 @@ void TimeEdit::set_upper_bound(int value){
     max_val = value;
 }
 
-void TimeEdit::keep_format() {
-    int value = this->text().toInt() % max_val;
+void TimeEdit::format_text(int value){
     QString formatted = QString("%1").arg(value, digits, 10, QChar('0'));
     this->setText(formatted);
+}
+
+void TimeEdit::keep_format() {
+    int value = this->text().toInt() % max_val;
+    format_text(value);
 }
