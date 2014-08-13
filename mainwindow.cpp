@@ -15,10 +15,27 @@ MainWindow::MainWindow(QWidget *parent) :
 
     timer = new QTimer(this);
     connect(timer, SIGNAL(timeout()), this, SLOT(tick()));
+
+    connect(ui->timeEditDay, SIGNAL(textChanged(QString)),
+                    this, SLOT(check_disable_actions()));
+    connect(ui->timeEditHour, SIGNAL(textChanged(QString)),
+                    this, SLOT(check_disable_actions()));
+    connect(ui->timeEditMinute, SIGNAL(textChanged(QString)),
+                    this, SLOT(check_disable_actions()));
+    connect(ui->timeEditSecond, SIGNAL(textChanged(QString)),
+                    this, SLOT(check_disable_actions()));
 }
 
 MainWindow::~MainWindow(){
     delete ui;
+}
+
+void MainWindow::check_disable_actions(){
+    if (!timer->isActive()){
+        int time_left = get_time_left();
+        this->ui->pushButtonAlarm->setEnabled(time_left > 0);
+        this->ui->pushButtonPower->setEnabled(time_left > 5);
+    }
 }
 
 void MainWindow::on_pushButtonAlarm_clicked(bool checked){
@@ -32,10 +49,8 @@ void MainWindow::on_pushButtonPower_clicked(bool checked){
     if (checked){
         this->ui->pushButtonAlarm->setChecked(false);
         set_countdown_state(true);
-
     }
 }
-
 
 void MainWindow::on_pushButtonAlarm_toggled(bool checked){
     if (!checked && !this->ui->pushButtonPower->isChecked()){
@@ -79,13 +94,12 @@ void MainWindow::set_countdown_state(bool state){
     }
 }
 
-
 bool MainWindow::update_counters(){
     int days = this->ui->timeEditDay->text().toInt();
     int hours = this->ui->timeEditHour->text().toInt();
     int minutes = this->ui->timeEditMinute->text().toInt();
     int seconds = this->ui->timeEditSecond->text().toInt();
-    qDebug() << days << " " << hours << " " << minutes << " " << seconds;
+
     if (days + hours + minutes + seconds == 0){
         return true;
     }
@@ -123,5 +137,6 @@ void MainWindow::tick(){
             qDebug() << "Power!";
             this->ui->pushButtonPower->setChecked(false);
         }
+        check_disable_actions();
     }
 }

@@ -18,6 +18,7 @@ public:
 
 private slots:
 
+    void check_disable_actions();
     void on_pushButtonAlarm_clicked(bool checked);
     void on_pushButtonPower_clicked(bool checked);
     void on_pushButtonAlarm_toggled(bool checked);
