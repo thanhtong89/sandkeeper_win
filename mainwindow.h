@@ -3,6 +3,7 @@
 
 #include <QMainWindow>
 
+
 namespace Ui {
 class MainWindow;
 }
@@ -17,17 +18,22 @@ public:
 
 private slots:
 
-
     void on_pushButtonAlarm_clicked(bool checked);
 
     void on_pushButtonPower_clicked(bool checked);
 
+    void on_pushButtonAlarm_toggled(bool checked);
+
+    void on_pushButtonPower_toggled(bool checked);
+
+    void tick();
 private:
     Ui::MainWindow *ui;
-    int days;
-    int hours;
-    int minutes;
-    int seconds;
+    QTimer *timer;
+
+
+    int get_time_left(); // counter time left, in seconds
+    void set_countdown_state(bool state);
 };
 
 #endif // MAINWINDOW_H
