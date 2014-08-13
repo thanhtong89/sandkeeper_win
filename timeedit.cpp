@@ -3,10 +3,24 @@
 #include <QDebug>
 #include <QStyleFactory>
 
+
 TimeEdit::TimeEdit(QWidget *parent) : QLineEdit(parent) {
     connect(this, SIGNAL(editingFinished()), this, SLOT(keep_format()));
     QStyle* fusion = QStyleFactory::create(QString("Fusion"));
     this->setStyle(fusion);
+}
+
+void TimeEdit::wheelEvent(QWheelEvent *event){
+    event->accept();
+    int value = this->text().toInt();
+    int delta = 1;
+    if (event->delta() < 0) {
+        delta = -delta;
+    }
+    value = (value + delta + max_val) % max_val;
+
+    QString formatted = QString("%1").arg(value, digits, 10, QChar('0'));
+    this->setText(formatted);
 }
 
 void TimeEdit::set_digits(int value){
