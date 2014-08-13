@@ -13,8 +13,12 @@ void TimeEdit::set_digits(int value){
     digits = value;
 }
 
+void TimeEdit::set_upper_bound(int value){
+    max_val = value;
+}
+
 void TimeEdit::keep_format() {
-    int value = this->text().toInt();
+    int value = this->text().toInt() % max_val;
     QString formatted = QString("%1").arg(value, digits, 10, QChar('0'));
     this->setText(formatted);
 }

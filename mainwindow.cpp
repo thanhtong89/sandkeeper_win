@@ -10,7 +10,8 @@ MainWindow::MainWindow(QWidget *parent) :
     ui(new Ui::MainWindow){
     ui->setupUi(this);
     ui->timeEditDay->set_digits(3);
-    ui->timeEditSecond->setText("aa");
+    ui->timeEditDay->set_upper_bound(999);
+    ui->timeEditHour->set_upper_bound(24);
     timer = new QTimer(this);
     connect(timer, SIGNAL(timeout()), this, SLOT(tick()));
 }
