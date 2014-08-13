@@ -9,9 +9,12 @@ TimeEdit::TimeEdit(QWidget *parent) : QLineEdit(parent) {
     this->setStyle(fusion);
 }
 
+void TimeEdit::set_digits(int value){
+    digits = value;
+}
 
 void TimeEdit::keep_format() {
     int value = this->text().toInt();
-    QString formatted = QString("%1").arg(value,2,10,QChar('0'));
+    QString formatted = QString("%1").arg(value, digits, 10, QChar('0'));
     this->setText(formatted);
 }

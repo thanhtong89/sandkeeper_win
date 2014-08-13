@@ -9,9 +9,13 @@ class TimeEdit : public QLineEdit
 
 public:
     explicit TimeEdit(QWidget *parent = 0);
+    void set_digits(int value);
 
 private slots:
     void keep_format();
+
+private:
+    int digits = 2;
 };
 //! [0]
 
