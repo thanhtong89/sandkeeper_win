@@ -111,7 +111,7 @@ public:
 
     void retranslateUi(QMainWindow *MainWindow)
     {
-        MainWindow->setWindowTitle(QApplication::translate("MainWindow", "SandKeeper 0.2", 0));
+        MainWindow->setWindowTitle(QApplication::translate("MainWindow", "SandKeeper", 0));
 #ifndef QT_NO_TOOLTIP
         pushButtonAlarm->setToolTip(QApplication::translate("MainWindow", "Start countdown, and play an alarm sound when done.", 0));
 #endif // QT_NO_TOOLTIP
