@@ -2,7 +2,7 @@
 #define TIMEEDIT_H
 
 #include <QtWidgets/QLineEdit>
-#include <QtGui>
+#include <QtGui/QWheelEvent>
 
 class TimeEdit : public QLineEdit
 {

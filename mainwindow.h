@@ -2,8 +2,7 @@
 #define MAINWINDOW_H
 
 #include <QMainWindow>
-
-
+#include <QSound>
 namespace Ui {
 class MainWindow;
 }
@@ -28,10 +27,13 @@ private slots:
 private:
     Ui::MainWindow *ui;
     QTimer *timer;
+    QSound *sound_effect;
 
     int get_time_left(); // counter time left, in seconds
     void set_countdown_state(bool state);
     bool update_counters(); // returns whether time's up
+    void do_alarm();
+    void do_power_off();
 };
 
 #endif // MAINWINDOW_H

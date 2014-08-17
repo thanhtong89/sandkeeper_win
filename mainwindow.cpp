@@ -24,6 +24,10 @@ MainWindow::MainWindow(QWidget *parent) :
                     this, SLOT(check_disable_actions()));
     connect(ui->timeEditSecond, SIGNAL(textChanged(QString)),
                     this, SLOT(check_disable_actions()));
+
+    QString path = QDir::toNativeSeparators(
+                QDir(QDir::currentPath()).filePath("ping.wav"));
+    sound_effect = new QSound(path, this);
 }
 
 MainWindow::~MainWindow(){
@@ -125,15 +129,23 @@ bool MainWindow::update_counters(){
     return (days + hours + minutes + seconds == 0);
 }
 
+void MainWindow::do_alarm(){
+    sound_effect->play();
+}
+
+void MainWindow::do_power_off(){
+
+}
+
 void MainWindow::tick(){
     if (update_counters()){
         qDebug() << "Time's up!";
         if (this->ui->pushButtonAlarm->isChecked()){
-            qDebug() << "Alarm!";
+            do_alarm();
             this->ui->pushButtonAlarm->setChecked(false);
         }
         else if (this->ui->pushButtonPower->isChecked()){
-            qDebug() << "Power!";
+            do_power_off();
             this->ui->pushButtonPower->setChecked(false);
         }
         check_disable_actions();
