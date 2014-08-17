@@ -33,7 +33,7 @@
      <bool>false</bool>
     </property>
    </widget>
-   <widget class="QPushButton" name="pushButtonPower">
+   <widget class="RightClickPushButton" name="pushButtonPower">
     <property name="geometry">
      <rect>
       <x>190</x>
@@ -202,6 +202,11 @@
    <class>TimeEdit</class>
    <extends>QLineEdit</extends>
    <header>timeedit.h</header>
+  </customwidget>
+  <customwidget>
+   <class>RightClickPushButton</class>
+   <extends>QPushButton</extends>
+   <header>rightclickpushbutton.h</header>
   </customwidget>
  </customwidgets>
  <tabstops>

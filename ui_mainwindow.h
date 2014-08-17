@@ -19,7 +19,7 @@
 #include <QtWidgets/QPushButton>
 #include <QtWidgets/QWidget>
 #include "timeedit.h"
-
+#include "rightclickpushbutton.h"
 QT_BEGIN_NAMESPACE
 
 class Ui_MainWindow
@@ -27,7 +27,7 @@ class Ui_MainWindow
 public:
     QWidget *centralWidget;
     QPushButton *pushButtonAlarm;
-    QPushButton *pushButtonPower;
+    RightClickPushButton *pushButtonPower;
     TimeEdit *timeEditSecond;
     TimeEdit *timeEditMinute;
     TimeEdit *timeEditHour;
@@ -46,7 +46,7 @@ public:
         pushButtonAlarm->setGeometry(QRect(10, 100, 181, 91));
         pushButtonAlarm->setCheckable(true);
         pushButtonAlarm->setFlat(false);
-        pushButtonPower = new QPushButton(centralWidget);
+        pushButtonPower = new RightClickPushButton(centralWidget);
         pushButtonPower->setObjectName(QStringLiteral("pushButtonPower"));
         pushButtonPower->setGeometry(QRect(190, 100, 181, 91));
         pushButtonPower->setCheckable(true);

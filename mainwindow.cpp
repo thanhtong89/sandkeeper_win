@@ -25,9 +25,15 @@ MainWindow::MainWindow(QWidget *parent) :
     connect(ui->timeEditSecond, SIGNAL(textChanged(QString)),
                     this, SLOT(check_disable_actions()));
 
+    connect(ui->pushButtonPower, SIGNAL(rightclicked()),
+                    this, SLOT(switch_power_mode()));
+
     QString path = QDir::toNativeSeparators(
                 QDir(QDir::currentPath()).filePath("ping.wav"));
     sound_effect = new QSound(path, this);
+
+    poweraction_map[PowerActions::HIBERNATE] = "Hibernate";
+    poweraction_map[PowerActions::SHUTDOWN] = "Shutdown";
 }
 
 MainWindow::~MainWindow(){
@@ -133,8 +139,16 @@ void MainWindow::do_alarm(){
     sound_effect->play();
 }
 
-void MainWindow::do_power_off(){
+void MainWindow::do_power_off(PowerActions mode){
+    switch (mode){
+        case PowerActions::HIBERNATE:
+            system("shutdown -h");
 
+            break;
+        default:
+            system("shutdown -s");
+
+    }
 }
 
 void MainWindow::tick(){
@@ -145,9 +159,22 @@ void MainWindow::tick(){
             this->ui->pushButtonAlarm->setChecked(false);
         }
         else if (this->ui->pushButtonPower->isChecked()){
-            do_power_off();
+            do_power_off(power_mode);
             this->ui->pushButtonPower->setChecked(false);
         }
         check_disable_actions();
     }
+}
+
+void MainWindow::switch_power_mode(){
+    if (this->ui->pushButtonPower->isChecked()){
+        return;
+    }
+    if (power_mode == PowerActions::HIBERNATE){
+        power_mode = PowerActions::SHUTDOWN;
+    }
+    else {
+        power_mode = PowerActions::HIBERNATE;
+    }
+    this->ui->pushButtonPower->setText(poweraction_map[power_mode]);
 }
