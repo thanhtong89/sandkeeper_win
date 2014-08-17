@@ -46,7 +46,7 @@
      <bool>true</bool>
     </property>
    </widget>
-   <widget class="RightClickPushButton" name="pushButtonPower">
+   <widget class="ScrollPushButton" name="pushButtonPower">
     <property name="geometry">
      <rect>
       <x>180</x>
@@ -56,7 +56,7 @@
      </rect>
     </property>
     <property name="toolTip">
-     <string>Right click to switch between Shutdown/Hibernate. Left click to start countdown.</string>
+     <string>Scroll mousewheel to switch between Shutdown/Hibernate. Left click to start countdown.</string>
     </property>
     <property name="text">
      <string/>
@@ -242,9 +242,9 @@
    <header>timeedit.h</header>
   </customwidget>
   <customwidget>
-   <class>RightClickPushButton</class>
+   <class>ScrollPushButton</class>
    <extends>QPushButton</extends>
-   <header>rightclickpushbutton.h</header>
+   <header>scrollpushbutton.h</header>
   </customwidget>
  </customwidgets>
  <tabstops>

@@ -24,7 +24,7 @@ MainWindow::MainWindow(QWidget *parent) :
     connect(ui->timeEditSecond, SIGNAL(textChanged(QString)),
                     this, SLOT(check_disable_actions()));
 
-    connect(ui->pushButtonPower, SIGNAL(rightclicked()),
+    connect(ui->pushButtonPower, SIGNAL(wheelscrolled()),
                     this, SLOT(switch_power_mode()));
 
     QString path = QDir::toNativeSeparators(
@@ -155,7 +155,6 @@ void MainWindow::do_power_off(PowerActions mode){
 
 void MainWindow::tick(){
     if (update_counters()){
-        qDebug() << "Time's up!";
         if (this->ui->pushButtonAlarm->isChecked()){
             do_alarm();
             this->ui->pushButtonAlarm->setChecked(false);

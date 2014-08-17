@@ -15,11 +15,11 @@ TEMPLATE = app
 SOURCES += main.cpp\
         mainwindow.cpp \
     timeedit.cpp \
-    rightclickpushbutton.cpp
+    scrollpushbutton.cpp
 
 HEADERS  += mainwindow.h \
     timeedit.h \
-    rightclickpushbutton.h
+    scrollpushbutton.h
 
 FORMS    += mainwindow.ui
 

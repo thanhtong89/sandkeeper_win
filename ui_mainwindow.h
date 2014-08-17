@@ -18,7 +18,7 @@
 #include <QtWidgets/QMenuBar>
 #include <QtWidgets/QPushButton>
 #include <QtWidgets/QWidget>
-#include "rightclickpushbutton.h"
+#include "scrollpushbutton.h"
 #include "timeedit.h"
 
 QT_BEGIN_NAMESPACE
@@ -28,7 +28,7 @@ class Ui_MainWindow
 public:
     QWidget *centralWidget;
     QPushButton *pushButtonAlarm;
-    RightClickPushButton *pushButtonPower;
+    ScrollPushButton *pushButtonPower;
     TimeEdit *timeEditSecond;
     TimeEdit *timeEditMinute;
     TimeEdit *timeEditHour;
@@ -51,7 +51,7 @@ public:
         pushButtonAlarm->setIconSize(QSize(80, 80));
         pushButtonAlarm->setCheckable(true);
         pushButtonAlarm->setFlat(true);
-        pushButtonPower = new RightClickPushButton(centralWidget);
+        pushButtonPower = new ScrollPushButton(centralWidget);
         pushButtonPower->setObjectName(QStringLiteral("pushButtonPower"));
         pushButtonPower->setGeometry(QRect(180, 90, 81, 81));
         QIcon icon1;
@@ -117,7 +117,7 @@ public:
 #endif // QT_NO_TOOLTIP
         pushButtonAlarm->setText(QString());
 #ifndef QT_NO_TOOLTIP
-        pushButtonPower->setToolTip(QApplication::translate("MainWindow", "Right click to switch between Shutdown/Hibernate. Left click to start countdown.", 0));
+        pushButtonPower->setToolTip(QApplication::translate("MainWindow", "Scroll mousewheel to switch between Shutdown/Hibernate. Left click to start countdown.", 0));
 #endif // QT_NO_TOOLTIP
         pushButtonPower->setText(QString());
 #ifndef QT_NO_TOOLTIP
