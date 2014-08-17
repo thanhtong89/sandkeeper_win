@@ -1,0 +1,8 @@
+<RCC>
+    <qresource prefix="/">
+        <file>images/alarm.png</file>
+        <file>images/hibernate.png</file>
+        <file>images/shutdown.png</file>
+        <file>sounds/ping.wav</file>
+    </qresource>
+</RCC>

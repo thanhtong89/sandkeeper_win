@@ -9,8 +9,7 @@ MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::MainWindow){
     ui->setupUi(this);
-    ui->timeEditDay->set_digits(3);
-    ui->timeEditDay->set_upper_bound(1000);
+    ui->timeEditDay->set_upper_bound(100);
     ui->timeEditHour->set_upper_bound(24);
 
     timer = new QTimer(this);
@@ -30,7 +29,10 @@ MainWindow::MainWindow(QWidget *parent) :
 
     QString path = QDir::toNativeSeparators(
                 QDir(QDir::currentPath()).filePath("ping.wav"));
-    sound_effect = new QSound(path, this);
+    sound_effect = new QSound(QStringLiteral(":/sounds/ping.wav"), this);
+
+    icon_shutdown = ui->pushButtonPower->icon();
+    icon_hibernate.addFile(QStringLiteral(":/images/hibernate.png"));
 
     poweraction_map[PowerActions::HIBERNATE] = "Hibernate";
     poweraction_map[PowerActions::SHUTDOWN] = "Shutdown";
@@ -167,14 +169,12 @@ void MainWindow::tick(){
 }
 
 void MainWindow::switch_power_mode(){
-    if (this->ui->pushButtonPower->isChecked()){
-        return;
-    }
     if (power_mode == PowerActions::HIBERNATE){
         power_mode = PowerActions::SHUTDOWN;
+        ui->pushButtonPower->setIcon(icon_shutdown);
     }
     else {
         power_mode = PowerActions::HIBERNATE;
+        ui->pushButtonPower->setIcon(icon_hibernate);
     }
-    this->ui->pushButtonPower->setText(poweraction_map[power_mode]);
 }

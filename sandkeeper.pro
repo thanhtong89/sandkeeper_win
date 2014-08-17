@@ -22,3 +22,6 @@ HEADERS  += mainwindow.h \
     rightclickpushbutton.h
 
 FORMS    += mainwindow.ui
+
+RESOURCES += \
+    mainwindow.qrc

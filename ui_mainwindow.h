@@ -18,8 +18,9 @@
 #include <QtWidgets/QMenuBar>
 #include <QtWidgets/QPushButton>
 #include <QtWidgets/QWidget>
-#include "timeedit.h"
 #include "rightclickpushbutton.h"
+#include "timeedit.h"
+
 QT_BEGIN_NAMESPACE
 
 class Ui_MainWindow
@@ -38,22 +39,30 @@ public:
     {
         if (MainWindow->objectName().isEmpty())
             MainWindow->setObjectName(QStringLiteral("MainWindow"));
-        MainWindow->resize(379, 197);
+        MainWindow->resize(269, 179);
         centralWidget = new QWidget(MainWindow);
         centralWidget->setObjectName(QStringLiteral("centralWidget"));
         pushButtonAlarm = new QPushButton(centralWidget);
         pushButtonAlarm->setObjectName(QStringLiteral("pushButtonAlarm"));
-        pushButtonAlarm->setGeometry(QRect(10, 100, 181, 91));
+        pushButtonAlarm->setGeometry(QRect(180, 10, 81, 81));
+        QIcon icon;
+        icon.addFile(QStringLiteral(":/images/alarm.png"), QSize(), QIcon::Normal, QIcon::Off);
+        pushButtonAlarm->setIcon(icon);
+        pushButtonAlarm->setIconSize(QSize(80, 80));
         pushButtonAlarm->setCheckable(true);
-        pushButtonAlarm->setFlat(false);
+        pushButtonAlarm->setFlat(true);
         pushButtonPower = new RightClickPushButton(centralWidget);
         pushButtonPower->setObjectName(QStringLiteral("pushButtonPower"));
-        pushButtonPower->setGeometry(QRect(190, 100, 181, 91));
+        pushButtonPower->setGeometry(QRect(180, 90, 81, 81));
+        QIcon icon1;
+        icon1.addFile(QStringLiteral(":/images/shutdown.png"), QSize(), QIcon::Normal, QIcon::Off);
+        pushButtonPower->setIcon(icon1);
+        pushButtonPower->setIconSize(QSize(81, 81));
         pushButtonPower->setCheckable(true);
-        pushButtonPower->setFlat(false);
+        pushButtonPower->setFlat(true);
         timeEditSecond = new TimeEdit(centralWidget);
         timeEditSecond->setObjectName(QStringLiteral("timeEditSecond"));
-        timeEditSecond->setGeometry(QRect(290, 10, 81, 81));
+        timeEditSecond->setGeometry(QRect(90, 90, 81, 81));
         QFont font;
         font.setFamily(QStringLiteral("Trebuchet MS"));
         font.setPointSize(24);
@@ -65,29 +74,29 @@ public:
         timeEditSecond->setAlignment(Qt::AlignCenter);
         timeEditMinute = new TimeEdit(centralWidget);
         timeEditMinute->setObjectName(QStringLiteral("timeEditMinute"));
-        timeEditMinute->setGeometry(QRect(210, 10, 81, 81));
+        timeEditMinute->setGeometry(QRect(10, 90, 81, 81));
         timeEditMinute->setFont(font);
         timeEditMinute->setStyleSheet(QStringLiteral("background-color: rgb(0, 170, 255);"));
         timeEditMinute->setMaxLength(2);
         timeEditMinute->setAlignment(Qt::AlignCenter);
         timeEditHour = new TimeEdit(centralWidget);
         timeEditHour->setObjectName(QStringLiteral("timeEditHour"));
-        timeEditHour->setGeometry(QRect(130, 10, 81, 81));
+        timeEditHour->setGeometry(QRect(90, 10, 81, 81));
         timeEditHour->setFont(font);
         timeEditHour->setStyleSheet(QStringLiteral("background-color: rgb(220, 0, 0);"));
         timeEditHour->setMaxLength(2);
         timeEditHour->setAlignment(Qt::AlignCenter);
         timeEditDay = new TimeEdit(centralWidget);
         timeEditDay->setObjectName(QStringLiteral("timeEditDay"));
-        timeEditDay->setGeometry(QRect(10, 10, 113, 81));
+        timeEditDay->setGeometry(QRect(10, 10, 81, 81));
         timeEditDay->setFont(font);
         timeEditDay->setStyleSheet(QStringLiteral("background-color: rgb(225, 225, 0);"));
-        timeEditDay->setMaxLength(3);
+        timeEditDay->setMaxLength(2);
         timeEditDay->setAlignment(Qt::AlignCenter);
         MainWindow->setCentralWidget(centralWidget);
         menuBar = new QMenuBar(MainWindow);
         menuBar->setObjectName(QStringLiteral("menuBar"));
-        menuBar->setGeometry(QRect(0, 0, 379, 26));
+        menuBar->setGeometry(QRect(0, 0, 269, 26));
         MainWindow->setMenuBar(menuBar);
         QWidget::setTabOrder(timeEditDay, timeEditHour);
         QWidget::setTabOrder(timeEditHour, timeEditMinute);
@@ -103,16 +112,16 @@ public:
     void retranslateUi(QMainWindow *MainWindow)
     {
         MainWindow->setWindowTitle(QApplication::translate("MainWindow", "SandKeeper 0.2", 0));
-        pushButtonAlarm->setText(QApplication::translate("MainWindow", "Alarm", 0));
-        pushButtonPower->setText(QApplication::translate("MainWindow", "Shutdown", 0));
+        pushButtonAlarm->setText(QString());
+        pushButtonPower->setText(QString());
         timeEditSecond->setInputMask(QApplication::translate("MainWindow", "00", 0));
         timeEditSecond->setText(QApplication::translate("MainWindow", "00", 0));
         timeEditMinute->setInputMask(QApplication::translate("MainWindow", "00", 0));
         timeEditMinute->setText(QApplication::translate("MainWindow", "30", 0));
         timeEditHour->setInputMask(QApplication::translate("MainWindow", "00", 0));
         timeEditHour->setText(QApplication::translate("MainWindow", "00", 0));
-        timeEditDay->setInputMask(QApplication::translate("MainWindow", "000", 0));
-        timeEditDay->setText(QApplication::translate("MainWindow", "000", 0));
+        timeEditDay->setInputMask(QApplication::translate("MainWindow", "00", 0));
+        timeEditDay->setText(QApplication::translate("MainWindow", "00", 0));
     } // retranslateUi
 
 };

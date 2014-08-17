@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>379</width>
-    <height>197</height>
+    <width>269</width>
+    <height>179</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -17,46 +17,66 @@
    <widget class="QPushButton" name="pushButtonAlarm">
     <property name="geometry">
      <rect>
-      <x>10</x>
-      <y>100</y>
-      <width>181</width>
-      <height>91</height>
+      <x>180</x>
+      <y>10</y>
+      <width>81</width>
+      <height>81</height>
      </rect>
     </property>
     <property name="text">
-     <string>Alarm</string>
+     <string/>
+    </property>
+    <property name="icon">
+     <iconset resource="mainwindow.qrc">
+      <normaloff>:/images/alarm.png</normaloff>:/images/alarm.png</iconset>
+    </property>
+    <property name="iconSize">
+     <size>
+      <width>80</width>
+      <height>80</height>
+     </size>
     </property>
     <property name="checkable">
      <bool>true</bool>
     </property>
     <property name="flat">
-     <bool>false</bool>
+     <bool>true</bool>
     </property>
    </widget>
    <widget class="RightClickPushButton" name="pushButtonPower">
     <property name="geometry">
      <rect>
-      <x>190</x>
-      <y>100</y>
-      <width>181</width>
-      <height>91</height>
+      <x>180</x>
+      <y>90</y>
+      <width>81</width>
+      <height>81</height>
      </rect>
     </property>
     <property name="text">
-     <string>Shutdown</string>
+     <string/>
+    </property>
+    <property name="icon">
+     <iconset resource="mainwindow.qrc">
+      <normaloff>:/images/shutdown.png</normaloff>:/images/shutdown.png</iconset>
+    </property>
+    <property name="iconSize">
+     <size>
+      <width>81</width>
+      <height>81</height>
+     </size>
     </property>
     <property name="checkable">
      <bool>true</bool>
     </property>
     <property name="flat">
-     <bool>false</bool>
+     <bool>true</bool>
     </property>
    </widget>
    <widget class="TimeEdit" name="timeEditSecond">
     <property name="geometry">
      <rect>
-      <x>290</x>
-      <y>10</y>
+      <x>90</x>
+      <y>90</y>
       <width>81</width>
       <height>81</height>
      </rect>
@@ -88,8 +108,8 @@
    <widget class="TimeEdit" name="timeEditMinute">
     <property name="geometry">
      <rect>
-      <x>210</x>
-      <y>10</y>
+      <x>10</x>
+      <y>90</y>
       <width>81</width>
       <height>81</height>
      </rect>
@@ -121,7 +141,7 @@
    <widget class="TimeEdit" name="timeEditHour">
     <property name="geometry">
      <rect>
-      <x>130</x>
+      <x>90</x>
       <y>10</y>
       <width>81</width>
       <height>81</height>
@@ -156,7 +176,7 @@
      <rect>
       <x>10</x>
       <y>10</y>
-      <width>113</width>
+      <width>81</width>
       <height>81</height>
      </rect>
     </property>
@@ -172,13 +192,13 @@
      <string notr="true">background-color: rgb(225, 225, 0);</string>
     </property>
     <property name="inputMask">
-     <string>000</string>
+     <string>00</string>
     </property>
     <property name="text">
-     <string>000</string>
+     <string>00</string>
     </property>
     <property name="maxLength">
-     <number>3</number>
+     <number>2</number>
     </property>
     <property name="alignment">
      <set>Qt::AlignCenter</set>
@@ -190,7 +210,7 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>379</width>
+     <width>269</width>
      <height>26</height>
     </rect>
    </property>
@@ -217,6 +237,8 @@
   <tabstop>pushButtonAlarm</tabstop>
   <tabstop>pushButtonPower</tabstop>
  </tabstops>
- <resources/>
+ <resources>
+  <include location="mainwindow.qrc"/>
+ </resources>
  <connections/>
 </ui>
