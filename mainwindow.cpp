@@ -36,6 +36,8 @@ MainWindow::MainWindow(QWidget *parent) :
 
     poweraction_map[PowerActions::HIBERNATE] = "Hibernate";
     poweraction_map[PowerActions::SHUTDOWN] = "Shutdown";
+
+    this->setFixedSize(size());
 }
 
 MainWindow::~MainWindow(){
