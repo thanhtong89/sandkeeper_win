@@ -1,6 +1,6 @@
 ; example2.nsi
 ;
-; This script is based on example1.nsi, but it remember the directory, 
+; This script is based on example1.nsi, but it remember the directory,
 ; has uninstall support and (optionally) installs start menu shortcuts.
 ;
 ; It will install example2.nsi into a directory that the user selects,
@@ -9,7 +9,7 @@
 !include "UninstallLog.nsh"
 ;--------------------------------
 ; Configure UnInstall log to only remove what is installed
-;-------------------------------- 
+;--------------------------------
   ;Set the name of the uninstall log
     !define UninstLog "uninstall.log"
     Var UninstLog
@@ -17,52 +17,52 @@
     !define REG_ROOT "HKLM"
   ;The registry path to write to
     !define REG_APP_PATH "SOFTWARE\appname"
- 
+
   ;Uninstall log file missing.
     LangString UninstLogMissing ${LANG_ENGLISH} "${UninstLog} not found!$\r$\nUninstallation cannot proceed!"
- 
+
   ;AddItem macro
     !define AddItem "!insertmacro AddItem"
- 
+
   ;BackupFile macro
-    !define BackupFile "!insertmacro BackupFile" 
- 
+    !define BackupFile "!insertmacro BackupFile"
+
   ;BackupFiles macro
-    !define BackupFiles "!insertmacro BackupFiles" 
- 
+    !define BackupFiles "!insertmacro BackupFiles"
+
   ;Copy files macro
     !define CopyFiles "!insertmacro CopyFiles"
- 
+
   ;CreateDirectory macro
     !define CreateDirectory "!insertmacro CreateDirectory"
- 
+
   ;CreateShortcut macro
     !define CreateShortcut "!insertmacro CreateShortcut"
- 
+
   ;File macro
     !define File "!insertmacro File"
- 
+
   ;Rename macro
     !define Rename "!insertmacro Rename"
- 
+
   ;RestoreFile macro
-    !define RestoreFile "!insertmacro RestoreFile"    
- 
+    !define RestoreFile "!insertmacro RestoreFile"
+
   ;RestoreFiles macro
     !define RestoreFiles "!insertmacro RestoreFiles"
- 
+
   ;SetOutPath macro
     !define SetOutPath "!insertmacro SetOutPath"
- 
+
   ;WriteRegDWORD macro
-    !define WriteRegDWORD "!insertmacro WriteRegDWORD" 
- 
+    !define WriteRegDWORD "!insertmacro WriteRegDWORD"
+
   ;WriteRegStr macro
     !define WriteRegStr "!insertmacro WriteRegStr"
- 
+
   ;WriteUninstaller macro
     !define WriteUninstaller "!insertmacro WriteUninstaller"
- 
+
   Section -openlogfile
     CreateDirectory "$INSTDIR"
     IfFileExists "$INSTDIR\${UninstLog}" +3
@@ -83,7 +83,7 @@ OutFile "SandKeeper_Installer.exe"
 ; The default installation directory
 InstallDir $PROGRAMFILES\SandKeeper
 
-; Registry key to check for directory (so if you install again, it will 
+; Registry key to check for directory (so if you install again, it will
 ; overwrite the old one automatically)
 InstallDirRegKey HKLM "Software\SandKeeper" "Install_Dir"
 
@@ -107,7 +107,7 @@ UninstPage instfiles
 Section "SandKeeper (required)"
 
   SectionIn RO
-  
+
   ; Set output path to the installation directory.
   ${SetOutPath} $INSTDIR
 
@@ -126,18 +126,18 @@ Section "SandKeeper (required)"
   ${File} "release\Qt5OpenGL.dll"
   ${File} "release\Qt5Svg.dll"
   ${File} "release\Qt5Widgets.dll"
-  ${File} "release\sandkeeper.exe"  
+  ${File} "release\sandkeeper.exe"
 
   ; Write the installation path into the registry
   ${WriteRegStr} HKLM "SOFTWARE\SandKeeper" "Install_Dir" "$INSTDIR"
-  
+
   ; Write the uninstall keys for Windows
   ${WriteRegStr} HKLM "Software\Microsoft\Windows\CurrentVersion\Uninstall\SandKeeper" "DisplayName" "SandKeeper"
   ${WriteRegStr} HKLM "Software\Microsoft\Windows\CurrentVersion\Uninstall\SandKeeper" "UninstallString" "$INSTDIR\uninstall.exe"
   ${WriteRegDWORD} HKLM "Software\Microsoft\Windows\CurrentVersion\Uninstall\SandKeeper" "NoModify" 1
   ${WriteRegDWORD} HKLM "Software\Microsoft\Windows\CurrentVersion\Uninstall\SandKeeper" "NoRepair" 1
   ${WriteUninstaller} "uninstall.exe"
-  
+
 SectionEnd
 
 Section "dll_accessible"
@@ -200,7 +200,7 @@ Section "Start Menu Shortcuts"
   ${CreateDirectory} "$SMPROGRAMS\SandKeeper"
   ${CreateShortcut} "$SMPROGRAMS\SandKeeper\Uninstall.lnk" "$INSTDIR\uninstall.exe" "" "$INSTDIR\uninstall.exe" 0
   ${CreateShortcut} "$SMPROGRAMS\SandKeeper\SandKeeper.lnk" "$INSTDIR\sandkeeper.exe" "" "$INSTDIR\sandkeeper.exe" 0
-  
+
 SectionEnd
 
 
@@ -212,28 +212,28 @@ Section Uninstall
   IfFileExists "$INSTDIR\${UninstLog}" +3
     MessageBox MB_OK|MB_ICONSTOP "$(UninstLogMissing)"
       Abort
- 
+
   Push $R0
   Push $R1
   Push $R2
   SetFileAttributes "$INSTDIR\${UninstLog}" NORMAL
   FileOpen $UninstLog "$INSTDIR\${UninstLog}" r
   StrCpy $R1 -1
- 
+
   GetLineCount:
     ClearErrors
     FileRead $UninstLog $R0
     IntOp $R1 $R1 + 1
     StrCpy $R0 $R0 -2
-    Push $R0   
+    Push $R0
     IfErrors 0 GetLineCount
- 
+
   Pop $R0
- 
+
   LoopRead:
     StrCmp $R1 0 LoopDone
     Pop $R0
- 
+
     IfFileExists "$R0\*.*" 0 +3
       RMDir $R0  #is dir
     Goto +9
@@ -245,7 +245,7 @@ Section Uninstall
     Goto +3
     StrCmp $R0 "${REG_ROOT} ${UNINSTALL_PATH}" 0 +2
       DeleteRegKey ${REG_ROOT} "${UNINSTALL_PATH}" #is Reg Element
- 
+
     IntOp $R1 $R1 - 1
     Goto LoopRead
   LoopDone:
@@ -255,7 +255,7 @@ Section Uninstall
   Pop $R2
   Pop $R1
   Pop $R0
- 
+
   ;Remove registry keys
     ;DeleteRegKey ${REG_ROOT} "${REG_APP_PATH}"
     ;DeleteRegKey ${REG_ROOT} "${UNINSTALL_PATH}"
@@ -266,7 +266,7 @@ SectionEnd
 ; Uninstaller
 
 ;Section "Uninstall"
-;  
+;
 ;  ; Remove registry keys
 ;  DeleteRegKey HKLM "Software\Microsoft\Windows\CurrentVersion\Uninstall\SandKeeper"
 ;  DeleteRegKey HKLM SOFTWARE\SandKeeper
