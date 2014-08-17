@@ -112,14 +112,32 @@ public:
     void retranslateUi(QMainWindow *MainWindow)
     {
         MainWindow->setWindowTitle(QApplication::translate("MainWindow", "SandKeeper 0.2", 0));
+#ifndef QT_NO_TOOLTIP
+        pushButtonAlarm->setToolTip(QApplication::translate("MainWindow", "Start countdown, and play an alarm sound when done.", 0));
+#endif // QT_NO_TOOLTIP
         pushButtonAlarm->setText(QString());
+#ifndef QT_NO_TOOLTIP
+        pushButtonPower->setToolTip(QApplication::translate("MainWindow", "Right click to switch between Shutdown/Hibernate. Left click to start countdown.", 0));
+#endif // QT_NO_TOOLTIP
         pushButtonPower->setText(QString());
+#ifndef QT_NO_TOOLTIP
+        timeEditSecond->setToolTip(QApplication::translate("MainWindow", "Scroll mousewheel to change the number of seconds left.", 0));
+#endif // QT_NO_TOOLTIP
         timeEditSecond->setInputMask(QApplication::translate("MainWindow", "00", 0));
         timeEditSecond->setText(QApplication::translate("MainWindow", "00", 0));
+#ifndef QT_NO_TOOLTIP
+        timeEditMinute->setToolTip(QApplication::translate("MainWindow", "Scroll mousewheel to change the number of minutes left.", 0));
+#endif // QT_NO_TOOLTIP
         timeEditMinute->setInputMask(QApplication::translate("MainWindow", "00", 0));
         timeEditMinute->setText(QApplication::translate("MainWindow", "30", 0));
+#ifndef QT_NO_TOOLTIP
+        timeEditHour->setToolTip(QApplication::translate("MainWindow", "Scroll mousewheel to change the number of hours left.", 0));
+#endif // QT_NO_TOOLTIP
         timeEditHour->setInputMask(QApplication::translate("MainWindow", "00", 0));
         timeEditHour->setText(QApplication::translate("MainWindow", "00", 0));
+#ifndef QT_NO_TOOLTIP
+        timeEditDay->setToolTip(QApplication::translate("MainWindow", "Scroll mousewheel to change the number of days left.", 0));
+#endif // QT_NO_TOOLTIP
         timeEditDay->setInputMask(QApplication::translate("MainWindow", "00", 0));
         timeEditDay->setText(QApplication::translate("MainWindow", "00", 0));
     } // retranslateUi
