@@ -4,5 +4,6 @@
         <file>images/hibernate.png</file>
         <file>images/shutdown.png</file>
         <file>sounds/ping.wav</file>
+        <file>images/sandkeeper.ico</file>
     </qresource>
 </RCC>

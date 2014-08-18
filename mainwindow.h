@@ -36,6 +36,7 @@ private:
     QSound *sound_effect;
     PowerActions power_mode = PowerActions::SHUTDOWN;
     std::map<PowerActions, QString> poweraction_map;
+    QIcon icon_main;
     QIcon icon_shutdown;
     QIcon icon_hibernate;
 

@@ -25,3 +25,5 @@ FORMS    += mainwindow.ui
 
 RESOURCES += \
     mainwindow.qrc
+
+RC_FILE = "icon.rc"

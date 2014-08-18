@@ -31,9 +31,11 @@ MainWindow::MainWindow(QWidget *parent) :
                 QDir(QDir::currentPath()).filePath("ping.wav"));
     sound_effect = new QSound(QStringLiteral(":/sounds/ping.wav"), this);
 
+    icon_main.addFile(QStringLiteral(":/images/sandkeeper.ico"));
     icon_shutdown = ui->pushButtonPower->icon();
     icon_hibernate.addFile(QStringLiteral(":/images/hibernate.png"));
 
+    this->setWindowIcon(icon_main);
     poweraction_map[PowerActions::HIBERNATE] = "Hibernate";
     poweraction_map[PowerActions::SHUTDOWN] = "Shutdown";
 
