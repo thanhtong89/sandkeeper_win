@@ -16,7 +16,9 @@
   ;The root registry to write to
     !define REG_ROOT "HKLM"
   ;The registry path to write to
-    !define REG_APP_PATH "SOFTWARE\appname"
+    !define REG_APP_PATH "SOFTWARE\SandKeeper"
+  ;Uninstall registry path
+    !define UNINSTALL_PATH "Software\Microsoft\Windows\CurrentVersion\Uninstall\SandKeeper"
 
   ;Uninstall log file missing.
     LangString UninstLogMissing ${LANG_ENGLISH} "${UninstLog} not found!$\r$\nUninstallation cannot proceed!"
@@ -85,7 +87,7 @@ InstallDir $PROGRAMFILES\SandKeeper
 
 ; Registry key to check for directory (so if you install again, it will
 ; overwrite the old one automatically)
-InstallDirRegKey HKLM "Software\SandKeeper" "Install_Dir"
+InstallDirRegKey ${REG_ROOT} "${REG_APP_PATH}" "Install_Dir"
 
 ; Request application privileges for Windows Vista
 RequestExecutionLevel admin
@@ -129,46 +131,46 @@ Section "SandKeeper (required)"
   ${File} "release\sandkeeper.exe"
 
   ; Write the installation path into the registry
-  ${WriteRegStr} HKLM "SOFTWARE\SandKeeper" "Install_Dir" "$INSTDIR"
+  ${WriteRegStr} ${REG_ROOT} "SOFTWARE\SandKeeper" "Install_Dir" "$INSTDIR"
 
   ; Write the uninstall keys for Windows
-  ${WriteRegStr} HKLM "Software\Microsoft\Windows\CurrentVersion\Uninstall\SandKeeper" "DisplayName" "SandKeeper"
-  ${WriteRegStr} HKLM "Software\Microsoft\Windows\CurrentVersion\Uninstall\SandKeeper" "UninstallString" "$INSTDIR\uninstall.exe"
-  ${WriteRegDWORD} HKLM "Software\Microsoft\Windows\CurrentVersion\Uninstall\SandKeeper" "NoModify" 1
-  ${WriteRegDWORD} HKLM "Software\Microsoft\Windows\CurrentVersion\Uninstall\SandKeeper" "NoRepair" 1
+  ${WriteRegStr} ${REG_ROOT} "${UNINSTALL_PATH}" "DisplayName" "SandKeeper"
+  ${WriteRegStr} ${REG_ROOT} "${UNINSTALL_PATH}" "UninstallString" "$INSTDIR\uninstall.exe"
+  ${WriteRegDWORD} ${REG_ROOT} "${UNINSTALL_PATH}" "NoModify" 1
+  ${WriteRegDWORD} ${REG_ROOT} "${UNINSTALL_PATH}" "NoRepair" 1
   ${WriteUninstaller} "uninstall.exe"
 
 SectionEnd
 
-Section "dll_accessible"
+Section "-dll_accessible"
   ${SetOutPath} "$INSTDIR\accessible"
   ${File} "release\accessible\qtaccessiblewidgets.dll"
 SectionEnd
 
-Section "dll_platforms"
+Section "-dll_platforms"
   ${SetOutPath} "$INSTDIR\platforms"
   ${File} "release\platforms\qwindows.dll"
 SectionEnd
 
-Section "dll_audio"
+Section "-dll_audio"
   ${SetOutPath} "$INSTDIR\audio"
   ${File} "release\audio\qtaudio_windows.dll"
 SectionEnd
 
-Section "dll_bearer"
+Section "-dll_bearer"
   ${SetOutPath} "$INSTDIR\bearer"
   ${File} "release\bearer\qgenericbearer.dll"
   ${File} "release\bearer\qnativewifibearer.dll"
 SectionEnd
 
-Section "Dll_mediaservice"
+Section "-dll_mediaservice"
   ${SetOutPath} "$INSTDIR\mediaservice"
   ${File} "release\mediaservice\dsengine.dll"
   ${File} "release\mediaservice\qtmedia_audioengine.dll"
   ${File} "release\mediaservice\wmfengine.dll"
 SectionEnd
 
-Section "dll_imageformats"
+Section "-dll_imageformats"
   ${SetOutPath} "$INSTDIR\imageformats"
   ${File} "release\imageformats\qdds.dll"
   ${File} "release\imageformats\qgif.dll"
@@ -184,12 +186,12 @@ Section "dll_imageformats"
   ${File} "release\imageformats\qwebp.dll"
 SectionEnd
 
-Section "dll_iconengines"
+Section "-dll_iconengines"
   ${SetOutPath} "$INSTDIR\iconengines"
   ${File} "release\iconengines\qsvgicon.dll"
 SectionEnd
 
-Section "dll_playlistformats"
+Section "-dll_playlistformats"
   ${SetOutPath} "$INSTDIR\playlistformats"
   ${File} "release\playlistformats\qtmultimedia_m3u.dll"
 SectionEnd
@@ -201,6 +203,10 @@ Section "Start Menu Shortcuts"
   ${CreateShortcut} "$SMPROGRAMS\SandKeeper\Uninstall.lnk" "$INSTDIR\uninstall.exe" "" "$INSTDIR\uninstall.exe" 0
   ${CreateShortcut} "$SMPROGRAMS\SandKeeper\SandKeeper.lnk" "$INSTDIR\sandkeeper.exe" "" "$INSTDIR\sandkeeper.exe" 0
 
+SectionEnd
+
+Section "Desktop Shortcuts"
+  ${CreateShortcut} "$DESKTOP\SandKeeper.lnk" "$INSTDIR\sandkeeper.exe" "" "$INSTDIR\sandkeeper.exe" 0
 SectionEnd
 
 
